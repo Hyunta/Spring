@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;import java.util.Map;
 import java.util.Optional;
-
 public class JdbcTemplateMemberRepository implements MemberRepository {
     private final JdbcTemplate jdbcTemplate;
     public JdbcTemplateMemberRepository(DataSource dataSource) {
@@ -27,20 +26,9 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
         member.setId(key.longValue());
         return member;
     }
-
-    @Override
-    public Optional<Member> findbyId(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Member> findbyName(String name) {
-        return Optional.empty();
-    }
-
     @Override
     public Optional<Member> findById(Long id) {
-        List<Member> result = jdbcTemplate.query("select * from member where id= ?", memberRowMapper(), id);
+        List<Member> result = jdbcTemplate.query("select * from member where id = ?", memberRowMapper(), id);
         return result.stream().findAny();
     }
     @Override
