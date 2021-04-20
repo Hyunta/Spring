@@ -1,5 +1,6 @@
 package hello.hellospring.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
@@ -23,7 +24,6 @@ public class MemberService {
      * 회원가입
      */
     public Long join(Member member){
-
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
         return member.getId();
